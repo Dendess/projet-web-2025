@@ -1,4 +1,4 @@
-<?php
+x<?php
 
 use App\Http\Controllers\CohortController;
 use App\Http\Controllers\CommonLifeController;
@@ -38,7 +38,12 @@ Route::middleware('auth')->group(function () {
         Route::get('knowledge', [KnowledgeController::class, 'index'])->name('knowledge.index');
 
         // Groups
-        Route::get('groups', [GroupController::class, 'index'])->name('group.index');
+        Route::get('groups', [GroupController::class, 'index'], function (){
+            $groups = User::all();  // You can use `Group::get()` as well
+
+            // Pass the groups to the view (assuming you are returning a Blade view)
+            return view('groups.index', compact('groups'));
+        })->name('group.index');
 
         // Retro
         route::get('retros', [RetroController::class, 'index'])->name('retro.index');

@@ -34,10 +34,18 @@ class DatabaseSeeder extends Seeder
         $user = User::create([
             'last_name'     => 'Student',
             'first_name'    => 'Student',
-            'email'         => 'student@codingfactory.com',
+            'email'         => 'student@codingfacttttory.com',
+            'password'      => Hash::make('123456'),
+
+        ] );
+
+        $user = User::create([
+
+            'last_name'     => 'Adam',
+            'first_name'    => 'Honvault',
+            'email'         => 'adam@honvault.com',
             'password'      => Hash::make('123456'),
         ]);
-
         // Create the default school
         $school = School::create([
             'user_id'   => $user->id,
