@@ -60,7 +60,7 @@ class DatabaseSeeder extends Seeder
             'name'      => 'Coding Factory',
         ]);
         $cohort = Cohort::create([
-            'user_id'   => $user->id,
+            'school_id'   => $user->id,
             'name'      => 'Coding Factory',
         ]);
 
