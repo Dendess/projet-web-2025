@@ -38,26 +38,18 @@
         </div>
     </x-slot>
     <!-- Check if there are any groups -->
-    @if($groups->isEmpty())
-        <p>No groups found.</p>
-    @else
-        <table border="1">
-            <thead>
-            <tr>
-                <th>Group Name</th>
-                <th>Description</th>
-                <th>Created At</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($groups as $group)
-                <tr>
-                    <td>{{ $group->name }}</td> <!-- Group name -->
-                    <td>{{ $group->description }}</td> <!-- Group description -->
-                    <td>{{ $group->created_at->format('Y-m-d') }}</td> <!-- Group created at -->
-                </tr>
+    <h1>Groups and Their Students</h1>
+
+    @foreach($groups as $group)
+        <h2>{{ $group->name }}</h2>
+        <p>{{ $group->description }}</p>
+        <p><strong>School:</strong> {{ $group->school->name ?? 'No school assigned' }}</p>
+
+        <h3>Students:</h3>
+        <ul>
+            @foreach($group->users as $student)
+                <li>{{ $student->first_name }} {{ $student->last_name }}</li>
             @endforeach
-            </tbody>
-        </table>
-    @endif
+        </ul>
+    @endforeach
 </x-app-layout>

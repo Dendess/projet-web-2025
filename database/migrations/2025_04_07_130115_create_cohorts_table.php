@@ -13,17 +13,15 @@ return new class extends Migration
     {
         Schema::create('cohorts', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-
+            $table->foreignId('school_id')->constrained();
             $table->id();
-            $table->unsignedBigInteger('school_id'); // Linked with Admin User ID
+
             $table->string('name');
             $table->string('description');
             $table->datetime('start_date');
             $table->datetime('end_date');
             $table->timestamps();
 
-            $table->foreign('school_id')->references('id')->on('schools')
-                    ->onDelete('cascade');
         });
     }
 

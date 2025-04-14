@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
         // Teachers
         Route::get('/teachers', [TeacherController::class, 'index'])->name('teacher.index');
 
+        Route::post('/groups', [GroupController::class, 'createGroupWithStudents']);
         // Students
         Route::get('students', [StudentController::class, 'index'])->name('student.index');
 

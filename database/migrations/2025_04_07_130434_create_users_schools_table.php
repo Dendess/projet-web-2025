@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('users_schools', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-
-            $table->id();
+             $table->id();
+            $table->foreignId('cohort_id')->nullable()->constrained()->onDelete('set null');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('school_id');
             $table->enum('role', ['admin', 'teacher', 'student'])->default('student');

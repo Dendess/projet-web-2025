@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Cohort;
+use App\Models\Group;
 use App\Models\School;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -38,6 +40,12 @@ class DatabaseSeeder extends Seeder
             'password'      => Hash::make('123456'),
 
         ] );
+        $group = Group::create([
+           // Assuming you already have a school with ID 1
+        ]);
+
+        // Assign students with IDs 1, 2, and 3 to the group
+        $group->users()->attach([1, 2, 3]);  // Attaching students to the group using their user IDs
 
         $user = User::create([
 
@@ -48,6 +56,10 @@ class DatabaseSeeder extends Seeder
         ]);
         // Create the default school
         $school = School::create([
+            'user_id'   => $user->id,
+            'name'      => 'Coding Factory',
+        ]);
+        $cohort = Cohort::create([
             'user_id'   => $user->id,
             'name'      => 'Coding Factory',
         ]);
