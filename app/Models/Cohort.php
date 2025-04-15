@@ -17,4 +17,14 @@ class Cohort extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public static function getAllCohorts()
+    {
+        return self::all();
+    }
+    public function showCohorts()
+    {
+        $cohorts = Cohort::all();
+        return view('cohorts.index', compact('cohorts'));
+    }
 }

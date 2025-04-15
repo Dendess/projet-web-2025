@@ -84,6 +84,8 @@
                     </h3>
                 </div>
                 <div class="card-body flex flex-col gap-5">
+                    <form action >
+
                     <x-forms.input name="name" :label="__('Nom')" />
 
                     <x-forms.input name="description" :label="__('Description')" />
@@ -95,6 +97,8 @@
                     <x-forms.primary-button>
                         {{ __('Valider') }}
                     </x-forms.primary-button>
+                    </form>
+
                 </div>
             </div>
         </div>

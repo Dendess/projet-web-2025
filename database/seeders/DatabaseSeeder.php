@@ -60,8 +60,10 @@ class DatabaseSeeder extends Seeder
             'name'      => 'Coding Factory',
         ]);
         $cohort = Cohort::create([
-            'school_id'   => $user->id,
+            'school_id'   => $school->id,
             'name'      => 'Coding Factory',
+            'description'   => 'Cergy',
+
         ]);
 
         // Create the admin role

@@ -7,6 +7,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class CohortController extends Controller
 {
@@ -29,5 +30,26 @@ class CohortController extends Controller
         return view('pages.cohorts.show', [
             'cohort' => $cohort
         ]);
+    }
+    public function generateGroup() {
+        //get all student
+
+        $prompt = "c'est quoi un zizi ?";
+
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+        ])->post('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' . config('services.gemini.api_key'), [
+            'contents' => [
+                [
+                    //add prompt in the request
+                    'parts' => [
+                        ['text' => $prompt]
+                    ]
+                ]
+            ]
+        ]);
+
+        $results = json_decode($response->body());
+
     }
 }
