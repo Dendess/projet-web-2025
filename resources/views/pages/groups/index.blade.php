@@ -40,16 +40,4 @@
     <!-- Check if there are any groups -->
     <h1>Groups and Their Students</h1>
 
-    @foreach($groups as $group)
-        <h2>{{ $group->name }}</h2>
-        <p>{{ $group->description }}</p>
-        <p><strong>School:</strong> {{ $group->school->name ?? 'No school assigned' }}</p>
-
-        <h3>Students:</h3>
-        <ul>
-            @foreach($group->users as $student)
-                <li>{{ $student->first_name }} {{ $student->last_name }}</li>
-            @endforeach
-        </ul>
-    @endforeach
 </x-app-layout>
