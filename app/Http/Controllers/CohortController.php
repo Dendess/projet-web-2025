@@ -34,7 +34,7 @@ class CohortController extends Controller
     public function generateGroup() {
         //get all student
 
-        $prompt = "c'est quoi un zizi ?";
+        $prompt = "mon prompt";
 
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
