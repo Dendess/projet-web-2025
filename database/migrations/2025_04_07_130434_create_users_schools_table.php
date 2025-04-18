@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('cohort_id')->nullable()->constrained()->onDelete('set null');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('school_id');
-            $table->unsignedBigInteger('average');
+
             $table->enum('role', ['admin', 'teacher', 'student'])->default('student');
             $table->timestamps();
         });

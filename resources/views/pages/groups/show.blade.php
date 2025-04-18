@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h1 class="flex items-center gap-1 text-sm font-normal">
-            <span class="text-gray-700">{{ $group->name }}</span>
+            <span class="text-gray-700">Groupe #{{ $group->id }}</span>
         </h1>
     </x-slot>
 
@@ -11,7 +11,7 @@
             <div class="grid">
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
-                        <h3 class="card-title">Etudiants</h3>
+                        <h3 class="card-title">Étudiants</h3>
                     </div>
                     <div class="card-body">
                         <div data-datatable="true" data-datatable-page-size="30">
@@ -19,36 +19,31 @@
                                 <table class="table table-border" data-datatable-table="true">
                                     <thead>
                                     <tr>
-                                        <th class="min-w-[135px]">
-                                            <span class="sort asc">
-                                                 <span class="sort-label">Nom</span>
-                                                 <span class="sort-icon"></span>
-                                            </span>
-                                        </th>
-                                        <th class="min-w-[135px]">
-                                            <span class="sort">
-                                                <span class="sort-label">Prénom</span>
-                                                <span class="sort-icon"></span>
-                                            </span>
-                                        </th>
-                                        <th class="min-w-[135px]">
-                                            <span class="sort">
-                                                <span class="sort-label">Date de naissance</span>
-                                                <span class="sort-icon"></span>
-                                            </span>
-                                        </th>
+                                        <th class="min-w-[135px]">Nom</th>
+                                        <th class="min-w-[135px]">Prénom</th>
+                                        <th class="min-w-[135px]">Moyenne</th>
+                                        <th class="min-w-[135px]">Date de naissance</th>
                                         <th class="max-w-[50px]"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @forelse($group->users as $user)
                                         <tr>
-                                        <td>Doe</td>
-                                        <td>John</td>
-                                        <td>10/02/2000</td>
-                                        <td class="cursor-pointer pointer">
-                                            <i class="ki-filled ki-trash"></i>
-                                        </td>
-                                    </tr>
+                                            <td>{{ $user->last_name }}</td>
+                                            <td>{{ $user->first_name }}</td>
+                                            <td>{{ number_format($user->average, 2) }}</td>
+                                            <td>
+                                                {{ $user->birthdate ? $user->birthdate->format('d/m/Y') : '—' }}
+                                            </td>
+                                            <td class="cursor-pointer pointer">
+                                                <i class="ki-filled ki-trash"></i>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="5" class="text-center text-gray-500">Aucun étudiant dans ce groupe.</td>
+                                        </tr>
+                                    @endforelse
                                     </tbody>
                                 </table>
                             </div>
@@ -68,24 +63,8 @@
                 </div>
             </div>
         </div>
-        <div class="lg:col-span-1">
-            <div class="card h-full">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        Ajouter un étudiant à la promotion
-                    </h3>
-                </div>
-                <div class="card-body flex flex-col gap-5">
-                    <x-forms.dropdown name="user_id" :label="__('Etudiant')">
-                        <option value="1">Etudiant 1</option>
-                    </x-forms.dropdown>
 
-                    <x-forms.primary-button>
-                        {{ __('Valider') }}
-                    </x-forms.primary-button>
-                </div>
-            </div>
-        </div>
+
     </div>
     <!-- end: grid -->
 </x-app-layout>

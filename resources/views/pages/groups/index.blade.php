@@ -7,23 +7,7 @@
         </h1>
     </x-slot>
     <tbody>
-    @foreach ($groups as $group)
-        <tr>
-            <td>
-                <div class="flex flex-col gap-2">
-                    <a class="leading-none font-medium text-sm text-gray-900 hover:text-primary"
-                       href="{{ route('groups.show', $group->id) }}">
-                        {{ $group->name }}
-                    </a>
-                    <span class="text-2sm text-gray-700 font-normal leading-3">
-                        {{ $group->location ?? 'N/A' }}
-                    </span>
-                </div>
-            </td>
-            <td>{{ $group->start_year }} - {{ $group->end_year }}</td>
-            <td>{{ $group->students_count ?? '0' }}</td>
-        </tr>
-    @endforeach
+
     </tbody>
     <!-- begin: grid -->
     <div class="grid lg:grid-cols-3 gap-5 lg:gap-7.5 items-stretch">
@@ -57,6 +41,31 @@
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
+                                    @forelse($groups as $group)
+                                        <tr>
+                                            <td>
+                                                <div class="flex flex-col gap-2">
+                                                    <a class="leading-none font-medium text-sm text-gray-900 hover:text-primary"
+                                                       href="{{ route('groups.show', $group->id) }}">
+                                                        Groupe #{{ $group->id }}
+                                                    </a>
+                                                    <span class="text-2sm text-gray-700 font-normal leading-3">
+                    Moyenne : {{ number_format($group->group_average, 2) }}
+                </span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                {{ now()->year }}-{{ now()->addYear()->year }}
+                                            </td>
+                                            <td>
+                                                {{ $group->users->count() }}
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3" class="text-center text-gray-500">Aucun groupe trouvé.</td>
+                                        </tr>
+                                        @endforelse
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -102,7 +111,8 @@
                     </h3>
                 </div>
                 <div class="card-body flex flex-col gap-5">
-                    <form action="{{route('generate.groups')}}" >
+                    <form method="POST" action="{{ route('generate.groups') }}">
+                        @csrf
 
                         <x-forms.input name="nb" :label="__('Nom')" />
 
