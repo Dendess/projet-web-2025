@@ -6,7 +6,25 @@
             </span>
         </h1>
     </x-slot>
-
+    <tbody>
+    @foreach ($groups as $group)
+        <tr>
+            <td>
+                <div class="flex flex-col gap-2">
+                    <a class="leading-none font-medium text-sm text-gray-900 hover:text-primary"
+                       href="{{ route('groups.show', $group->id) }}">
+                        {{ $group->name }}
+                    </a>
+                    <span class="text-2sm text-gray-700 font-normal leading-3">
+                        {{ $group->location ?? 'N/A' }}
+                    </span>
+                </div>
+            </td>
+            <td>{{ $group->start_year }} - {{ $group->end_year }}</td>
+            <td>{{ $group->students_count ?? '0' }}</td>
+        </tr>
+    @endforeach
+    </tbody>
     <!-- begin: grid -->
     <div class="grid lg:grid-cols-3 gap-5 lg:gap-7.5 items-stretch">
         <div class="lg:col-span-2">
@@ -46,7 +64,7 @@
                                         <td>
                                             <div class="flex flex-col gap-2">
                                                 <a class="leading-none font-medium text-sm text-gray-900 hover:text-primary"
-                                                   href="{{ route('cohort.show', 1) }}">
+                                                   href="{{ route('groups.show', 1) }}">
                                                     Promotion B1
                                                 </a>
                                                 <span class="text-2sm text-gray-700 font-normal leading-3">
@@ -84,15 +102,11 @@
                     </h3>
                 </div>
                 <div class="card-body flex flex-col gap-5">
-                    <form action >
+                    <form action="{{route('generate.groups')}}" >
 
-                        <x-forms.input name="name" :label="__('Nom')" />
+                        <x-forms.input name="nb" :label="__('Nom')" />
 
-                        <x-forms.input name="description" :label="__('Description')" />
-
-                        <x-forms.input type="date" name="year" :label="__('Début de l\'année')" placeholder="" />
-
-                        <x-forms.input type="date" name="year" :label="__('Fin de l\'année')" placeholder="" />
+                        <x-forms.input name="nbg" :label="__('Description')" />
 
                         <x-forms.primary-button>
                             {{ __('Valider') }}

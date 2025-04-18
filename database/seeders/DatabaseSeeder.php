@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         // Create the default user
         $admin = User::create([
             'last_name'     => 'Admin',
+            'average'         => '15',
             'first_name'    => 'Admin',
             'email'         => 'admin@codingfactory.com',
             'password'      => Hash::make('123456'),
@@ -28,6 +29,7 @@ class DatabaseSeeder extends Seeder
 
         $teacher = User::create([
             'last_name'     => 'Teacher',
+            'average'         => '20',
             'first_name'    => 'Teacher',
             'email'         => 'teacher@codingfactory.com',
             'password'      => Hash::make('123456'),
@@ -35,6 +37,7 @@ class DatabaseSeeder extends Seeder
 
         $user = User::create([
             'last_name'     => 'Student',
+            'average'         => '5',
             'first_name'    => 'Student',
             'email'         => 'student@codingfacttttory.com',
             'password'      => Hash::make('123456'),
@@ -52,6 +55,7 @@ class DatabaseSeeder extends Seeder
             'last_name'     => 'Adam',
             'first_name'    => 'Honvault',
             'email'         => 'adam@honvault.com',
+            'average'         => '10',
             'password'      => Hash::make('123456'),
         ]);
         // Create the default school

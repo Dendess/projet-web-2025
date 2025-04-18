@@ -26,12 +26,14 @@ Route::middleware('auth')->group(function () {
 
         // Cohorts
         Route::get('/cohorts', [CohortController::class, 'index'])->name('cohort.index');
+
         Route::get('/cohort/{cohort}', [CohortController::class, 'show'])->name('cohort.show');
 
         // Teachers
         Route::get('/teachers', [TeacherController::class, 'index'])->name('teacher.index');
 
-        Route::post('/groups', [GroupController::class, 'createGroupWithStudents']);
+
+
         // Students
         Route::get('students', [StudentController::class, 'index'])->name('student.index');
 
@@ -39,18 +41,19 @@ Route::middleware('auth')->group(function () {
         Route::get('knowledge', [KnowledgeController::class, 'index'])->name('knowledge.index');
 
         // Groups
-        Route::get('groups', [GroupController::class, 'index'], function (){
-            $groups = User::all();  // You can use `Group::get()` as well
-
-            // Pass the groups to the view (assuming you are returning a Blade view)
-            return view('groups.index', compact('groups'));
-        })->name('group.index');
+        Route::get('groups', [GroupController::class, 'index'])->name('group.index');
+        Route::get('/groups-generate', [GroupController::class, 'generate'])->name('generate.groups');
 
         // Retro
         route::get('retros', [RetroController::class, 'index'])->name('retro.index');
 
         // Common life
         Route::get('common-life', [CommonLifeController::class, 'index'])->name('common-life.index');
+
+        Route::get('groupes', [GroupController::class, 'index'])->name('groups.index');
+
+// Route for showing one group (used in the <a href> in your Blade file)
+        Route::get('groupes/{id}', [GroupController::class, 'show'])->name('groups.show');
     });
 
 });

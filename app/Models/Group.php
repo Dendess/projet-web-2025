@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class   Group extends Model
 {
-    protected $fillable = ['size'];
+    protected $fillable = ['size', 'group_average'];
 
     /**
      * Return cohort in this group
