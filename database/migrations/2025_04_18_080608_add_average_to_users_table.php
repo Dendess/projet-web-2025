@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->unsignedBigInteger('average')->nullable(); // or ->default(0)
+            $table->unsignedBigInteger('cohort_id')->nullable(); // or ->default(0)
         });
     }
 

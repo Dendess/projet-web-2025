@@ -16,6 +16,7 @@ class User extends Authenticatable
         'last_name',
         'first_name',
         'email',
+        'cohort_id',
         'average'
     ];
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -81,7 +82,14 @@ class User extends Authenticatable
             ->withPivot('role')
             ->first();
     }
-
+    public function hasRole(string $role): bool
+    {
+        return $this->userSchools()->where('role', $role)->exists();
+    }
+    public function userSchools()
+    {
+        return $this->hasMany(UserSchool::class);
+    }
     public function cohort()
     {
         return $this->belongsTo(Cohort::class);

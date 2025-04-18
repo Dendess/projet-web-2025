@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h1 class="flex items-center gap-1 text-sm font-normal">
-            <span class="text-gray-700">Groupe #{{ $group->id }}</span>
+            <span class="text-gray-700">Groupe {{ $group->id }} - Average : {{ $group->group_average }}</span>
         </h1>
     </x-slot>
 
@@ -63,8 +63,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
     <!-- end: grid -->
 </x-app-layout>

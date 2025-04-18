@@ -2,30 +2,26 @@
 
 namespace App\Providers;
 
-use App\Models\Group;
-use App\Models\User;
-use App\Policies\UserPolicy;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
-class AppServiceProvider extends ServiceProvider
+// If you're using App\Models\Group
+use App\Models\Group;
+use App\Policies\GroupPolicy;
+
+class AuthServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * The policy mappings for the application.
      */
-    public function register(): void
-    {
-        //
-    }
-
     protected $policies = [
-        User::class => UserPolicy::class,
+        Group::class => GroupPolicy::class,
     ];
     /**
-     * Bootstrap any application services.
+     * Register any authentication / authorization services.
      */
     public function boot(): void
     {
-        Schema::defaultStringLength(191);
+        $this->registerPolicies();
     }
 }

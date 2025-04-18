@@ -27,8 +27,10 @@
         {
 
             $nb = $request->input('nb');
+            $nbp = $request->input('nbp');
 
-            $students = User::all();
+            $students = User::where('cohort_id', $nbp)->get()   ;
+            $previousgroups = Group::all();
 
             // Convertir les étudiants en JSON lisible dans le prompt
             $studentsArray = $students->map(function ($student) {
@@ -43,7 +45,7 @@
             $studentsJson = json_encode($studentsArray, JSON_PRETTY_PRINT);
 
             $prompt = <<<EOT
-    Je veux répartir ces élèves dans des groupes de {$nb}. Voici les élèves : {$studentsJson}. Une fois les groupes faits, calcule la moyenne (group_average) de chaque groupe d'après la moyenne (average) de chaque étudiant qu'il contient. Fait en sorte que les group_averages soient le plus proche possible les unes des autres. Si un groupe est incomplet, ne rajoute pas d'élèves inexistants.
+    Je veux répartir ces élèves dans des groupes de {$nb}. Voici les élèves : {$studentsJson}.Voici les groupes déja fait :{$previousgroups}. Evite au maximum les répétitions. Une fois les groupes faits, calcule la moyenne (group_average) de chaque groupe d'après la moyenne (average) de chaque étudiant qu'il contient. Fait en sorte que les group_averages soient le plus proche possible les unes des autres. Si un groupe est incomplet, ne rajoute pas d'élèves inexistants.
     Répond uniquement avec un JSON strictement conforme à cette structure :
     {
       "groups": [
@@ -85,10 +87,7 @@
             if (!$data || !isset($data['groups'])) {
                 return back()->withErrors(['format' => 'Le JSON retourné est invalide ou mal formé.']);
             }
-            // Vider les anciennes données si besoin
-    //        Group::truncate();
-    //        \DB::table('group_user')->truncate();
-            // Enregistrer chaque groupe et ses étudiants
+
             foreach ($data['groups'] as $groupData) {
                 $group = Group::create([
                     'size' => count($groupData['students']),
@@ -100,8 +99,7 @@
                 }
             }
             $groups = Group::with('users')->get(); // Récupérer les groupes avec les étudiants pour l'affichage
-            return view('pages.groups.index', compact('groups'));
-        }
+            return redirect()->route('groups.index')->with('success', 'Groupes créés avec succès.');        }
         public function show($id)
         {
             $group = Group::with('users')->findOrFail($id);

@@ -68,23 +68,7 @@
                                         @endforelse
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="flex flex-col gap-2">
-                                                <a class="leading-none font-medium text-sm text-gray-900 hover:text-primary"
-                                                   href="{{ route('groups.show', 1) }}">
-                                                    Promotion B1
-                                                </a>
-                                                <span class="text-2sm text-gray-700 font-normal leading-3">
-                                                    Cergy
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td>2024-2025</td>
-                                        <td>34</td>
-                                    </tr>
-                                    </tbody>
+
                                 </table>
                             </div>
                             <div class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium">
@@ -103,7 +87,8 @@
                 </div>
             </div>
         </div>
-        <div class="lg:col-span-1">
+        @can('create', \App\Models\Group::class)
+            <div class="lg:col-span-1">
             <div class="card h-full">
                 <div class="card-header">
                     <h3 class="card-title">
@@ -114,9 +99,9 @@
                     <form method="POST" action="{{ route('generate.groups') }}">
                         @csrf
 
-                        <x-forms.input name="nb" :label="__('Nom')" />
+                        <x-forms.input name="nb" :label="__('Taille')" />
 
-                        <x-forms.input name="nbg" :label="__('Description')" />
+                        <x-forms.input name="nbp" :label="__('Promotion')" />
 
                         <x-forms.primary-button>
                             {{ __('Valider') }}
@@ -126,6 +111,7 @@
                 </div>
             </div>
         </div>
+        @endcan
     </div>
     <!-- end: grid -->
 </x-app-layout>
