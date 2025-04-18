@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class   Group extends Model
 {
-    protected $fillable = ['size','average', 'cohort_id'];
+    protected $fillable = ['size','group_average', 'cohort_id'];
 
     /**
      * Return cohort in this group
@@ -19,6 +19,7 @@ class   Group extends Model
      * Return All user in this group
      * @return BelongsToMany
      */
+    //Definit la relation Many to Many entre les users et les groupes
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'users_groups');

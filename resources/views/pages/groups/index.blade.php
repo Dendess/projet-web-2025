@@ -101,9 +101,7 @@
 
                         <x-forms.input name="nb" :label="__('Taille')" />
 
-                        <x-forms.input name="nbp" :label="__('Promotion')" />
-
-                        <x-forms.primary-button>
+                        <x-forms.select name="nbp" :label="__('Promotion')" :options="$cohortsall->pluck('name'   , 'id')" />              <x-forms.primary-button>
                             {{ __('Valider') }}
                         </x-forms.primary-button>
                     </form>

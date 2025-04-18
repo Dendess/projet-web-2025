@@ -151,13 +151,13 @@ class DatabaseSeeder extends Seeder
         ]);
         $cohort = Cohort::create([
             'school_id'   => $school->id,
-            'name'      => 'Coding Factory',
+            'name'      => 'Coding Factory - Cergy',
             'description'   => 'Cergy',
 
         ]);
         $cohort = Cohort::create([
             'school_id'   => $school->id,
-            'name'      => 'Coding Factory',
+            'name'      => 'Coding Factory - Paris',
             'description'   => 'Paris',
 
         ]);

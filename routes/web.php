@@ -1,4 +1,4 @@
-x<?php
+<?php
 
 use App\Http\Controllers\CohortController;
 use App\Http\Controllers\CommonLifeController;
@@ -24,15 +24,13 @@ Route::middleware('auth')->group(function () {
         // Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-        // Cohorts
+        // Promotions
         Route::get('/cohorts', [CohortController::class, 'index'])->name('cohort.index');
-
+        // Route pour afficher une promotion particulière
         Route::get('/cohort/{cohort}', [CohortController::class, 'show'])->name('cohort.show');
 
         // Teachers
         Route::get('/teachers', [TeacherController::class, 'index'])->name('teacher.index');
-
-
 
         // Students
         Route::get('students', [StudentController::class, 'index'])->name('student.index');
@@ -42,17 +40,20 @@ Route::middleware('auth')->group(function () {
 
         // Groups
         Route::get('groups', [GroupController::class, 'index'])->name('group.index');
+
+        // Route pour générer les groupes automatiquement via formulaire
         Route::post('/groups-generate', [GroupController::class, 'generate'])->name('generate.groups');
 
         // Retro
-        route::get('retros', [RetroController::class, 'index'])->name('retro.index');
+        Route::get('retros', [RetroController::class, 'index'])->name('retro.index');
 
         // Common life
         Route::get('common-life', [CommonLifeController::class, 'index'])->name('common-life.index');
 
+        // Route alternative pour afficher la liste des groupes
         Route::get('groupes', [GroupController::class, 'index'])->name('groups.index');
 
-// Route for showing one group (used in the <a href> in your Blade file)
+        // Route pour afficher un groupe spécifique
         Route::get('groupes/{id}', [GroupController::class, 'show'])->name('groups.show');
     });
 
