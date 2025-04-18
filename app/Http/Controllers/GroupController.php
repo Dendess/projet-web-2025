@@ -52,6 +52,7 @@
         {
           "number": 1,
           "group_average": <float>,
+          "cohort_id": {$nbp},
           "students": [
             { "id": <int>, "last_name": "<string>", "first_name": "<string>", "average": <float> }
           ]
@@ -92,6 +93,7 @@
                 $group = Group::create([
                     'size' => count($groupData['students']),
                     'group_average' => round($groupData['group_average'], 2),
+                    'cohort_id' => round($groupData['cohort_id'], 2),
                 ]);
 
                 foreach ($groupData['students'] as $student) {

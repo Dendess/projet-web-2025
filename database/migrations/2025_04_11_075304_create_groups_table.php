@@ -10,7 +10,8 @@ return new class extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
-             $table->unsignedInteger('size')->nullable();
+            $table->unsignedInteger('size')->nullable();
+            $table->unsignedInteger('cohort_id')->nullable();
              $table->float('group_average')->nullable();
              $table->timestamps();
         });
